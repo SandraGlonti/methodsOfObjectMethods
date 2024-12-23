@@ -1,0 +1,81 @@
+Klasa Object – klasa, po której bezpośrednio lub pośrednio dziedziczy
+każda inna klasa. Pośrednio oznacza, że dziedziczą przez przechodniość.
+ Np. klasa Pies dziedziczy po klasie Zwierzę, ale również przez pośrednictwo
+  klasy Zwierzę dziedziczy po klasie Object.
+(Obiektami nie są liczby, znaki oraz wartości logiczne)
+Wszystkie typy tablicowe – bez względu na to co przechowują, są typami
+klasowymi rozszerzającymi klasę Object.
+
+Metoda equals():
+Metoda służy do strukturalnego porównywania dwóch obiektów:
+
+Employee employee1 = new Employee("Jan", "Nowak", 4500);
+Employee employee2 = new Employee("Jan", "Nowak", 4500);
+
+System.out.println("employee1 == employee2:");
+System.out.println(employee1 == employee2); //false, dwa różne adresy w pamięci
+Operator “==” zastosowany przy porównywaniu typów obiektowych sprawdza równość referencji czyli adresów w pamięci.
+
+Musimy zastosować metodę equals() (domyślna implementacja w klasie Object porównuje referencje):
+System.out.println("employee1.equals(employee2)");
+System.out.println(employee1.equals(employee2));
+Ale nadal ona zwróci nam false, ponieważ jest ona brana z klasy Object
+public boolean equals(Object obj) {
+    return (this == obj);
+}
+W standardowej implementacji mamy porównanie referencji “this”(employee1) oraz “obj”(employee2)
+
+
+
+Metoda hashCode():
+Metodę hashCode() (poniebnie jak equals()) można wywołać na dowolnym obiekcie – zwraca ona int’a.
+!!!Wynik metody powinien być zgodny z trzema zasadami!!!:
+•	Za każdym razem metoda powinna zwracać tą samą wartość dla danego obiektu;
+•	Jeżeli porówanie equals() dwóch obiektów zwraca true to hashCode() obu obiektów powinien być identyczny;
+•	 Dwa różne obiekty mogą zwrócić ten sam wynik metody hashCode(). Nie jest wymagane, żeby dwa różne obiekty
+zwracały dwa różne wyniki hashCode().
+
+Uproszczając: Jeżeli equals() jest true to i zawsze hashCode() będzie taki sam dla obu obiektów.
+Natomiast ten sam hashCode() dla obu obiektów nie oznacza, że ich wynik equals() będzie true.
+
+Kursantka powinien znać:
+•	Czym jest klasa Object;
+Klasa Object – klasa, po której bezpośrednio lub pośrednio dziedziczy każda inna klasa. Pośrednio oznacza, że
+dziedziczą przez przechodniość. Np. klasa Pies dziedziczy po klasie Zwierzę, ale również przez pośrednictwo klasy
+Zwierzę dziedziczy po klasie Object.
+Obiektami nie są liczby, znaki oraz wartości logiczne.
+Wszystkie typy tablicowe – bez względu na to co przechowują, są typami klasowymi rozszerzającymi klasę Object.
+•	Metoda equals() - służy do strukturalnego porównywania dwóch obiektów. Domyślna implementacja z klasy Object
+ porównuje tylko referencje.
+•	Metoda hashCode() – służy do zwracania wartości liczbowej typu int danego obiektu. Prawidłowości związane z hashCode():
+- Za każdym razem metoda powinna zwracać tą samą wartość dla danego obiektu;
+- Jeżeli porówanie equals() dwóch obiektów zwraca true to hashCode() obu obiektów powinien być identyczny;
+- Dwa różne obiekty mogą zwrócić ten sam wynik metody hashCode(). Nie jest wymagane, żeby dwa różne obiekty zwracały
+dwa różne wyniki hashCode().
+•	Kontrakt pomiędzy equals() i hashCode()(tak w skrócie): jeżeli equals() dwóch obiektów daje true to hashCode()
+obu obiektów będzie zawsze identyczny. Identyczny hashCode() dwóch obiektów nie oznacza, że będą one identyczne przy
+ porównaniu equals().
+•	Metoda toString() - zwraca String reprezentującego wartość obiektu. We własnych klasach powinno się
+przesłaniać/nadpisywać tą metodę.
+
+Praca domowa_1: Magazyn do przechowywania samochodów.
+Klasa Car – pola producent i model
+Klasa CarWarehouse – klasa, która ma przechowywać auta. Wywołując konstruktor tej klasy masz przekazywać
+tylko jeden parametr – ile ten magazyn pomieści samochodów. W klasie powinna znajdować się metoda odpowiedzialna
+za umieszczanie auta w magazynie. Pamiętaj, o tym, że gdy będzie brakowało miejsc to ma pojawić się w konsoli
+ odpowiedni komunikat.
+Kolejna metoda ma drukować informację w konsoli dotyczącą tego jaki przykładowy samochód przekazaliśmy do
+ wyszukiwania i ile znaleziono samochodów o identycznych parametrach.
+W klasie ma się znajdować odpowiednio skonstruowana metoda, która zwróci aktualną tablicę samochodów
+ przechowywanych w magazynie (może być wraz z nullami).  Pamiętaj, że ten getter nie może złamać zasad hermetyzacji.
+Klasa CarWarehouseRunner – klasa, w której przetestujesz swój serwis.
+
+
+CarWareHouse wh = new CarWareHouse()
+
+Car bmw = new Car("Bmw", "f30");
+wh.addCar(bmw);
+
+Car bmw2 = new Car("Bmw", "f30");
+
+wh.searchCar(bwm2); == 1
